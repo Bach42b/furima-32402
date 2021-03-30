@@ -4,14 +4,14 @@
 
 ｜ Column             | type   | options                  |
 ｜ ------------------ | ------ | ------------------------ |
-｜ nickname           | string | NULL: false              |
-｜ email              | string | NULL: false, unique: true|
-｜ encrypted_password | string | NULL: false              |
-｜ first_name         | string | NULL: false              |
-｜ last_name          | string | NULL: false              |
-｜ first_name_kana    | string | NULL: false              |
-｜ last_name_kana     | string | NULL: false              |
-｜ birthday           | date   | NULL: false              |
+｜ nickname           | string | null: false              |
+｜ email              | string | null: false, unique: true|
+｜ encrypted_password | string | null: false              |
+｜ first_name         | string | null: false              |
+｜ last_name          | string | null: false              |
+｜ first_name_kana    | string | null: false              |
+｜ last_name_kana     | string | null: false              |
+｜ birthday           | date   | null: false              |
 
 ### Association
 
@@ -22,20 +22,20 @@
 
 ｜ Column           | type       | options                        |
 ｜ ---------------- | ---------- | ------------------------------ |
-｜ product_name     | string     | NULL: false                    |
-｜ description      | text       | NULL: false                    |
-｜ category_id      | integer    | NULL: false                    |
-｜ condition_id     | integer    | NULL: false                    |
-｜ delivery_fee_id  | integer    | NULL: false                    |
-｜ area_id          | integer    | NULL: false                    |
-｜ delivery_time_id | integer    | NULL: false                    |
-｜ price            | string     | NULL: false                    |
+｜ product_name     | string     | null: false                    |
+｜ description      | text       | null: false                    |
+｜ category_id      | integer    | null: false                    |
+｜ condition_id     | integer    | null: false                    |
+｜ delivery_fee_id  | integer    | null: false                    |
+｜ area_id          | integer    | null: false                    |
+｜ delivery_time_id | integer    | null: false                    |
+｜ price            | integer    | null: false                    |
 ｜ user             | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- has_one :buys
+- has_one :buy
 
 ## buysテーブル
 
@@ -50,18 +50,20 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_one :addresses
+- has_one :address
 
-## Adressesテーブル
+## Addressesテーブル
 
-｜ Column         | type       | options     |
-｜ -------------- | ---------- | ----------- |
-｜ postal_code    | text       | NULL: false |
-｜ prefectures    | references | NULL: false |
-｜ municipalities | string     | NULL: false |
-｜ building_name  | string     | NULL: false |
-｜ house_number   | string     | NULL: false |
-｜ phon_number    | string     | NULL: false |
+｜ Column         | type       | options                        |
+｜ -------------- | ---------- | ------------------------------ |
+｜ postal_code    | string     | null: false                    |
+｜ prefectures_id | integer    | null: false                    |
+｜ municipalities | string     | null: false                    |
+｜ building_name  | string     |                                |
+｜ house_number   | string     | null: false                    |
+｜ phone_number   | string     | null: false                    |
+｜ user           | references | null: false, foreign_key: true |
+｜ item           | references | null: false, foreign_key: true |
 
 
 ### Association
