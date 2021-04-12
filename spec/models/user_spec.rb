@@ -108,5 +108,11 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Last name kana is invalid", "First name kana is invalid")
     end
+
+    it '全ての記述が正しく入力されれば登録できる' do
+      expect(@user).to be_valid
+    end
+
+  
   end
 end
