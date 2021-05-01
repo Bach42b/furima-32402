@@ -32,34 +32,40 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Description can't be blank")
       end
 
-      it 'カテゴリーが空では登録できないこと' do
-        @item.category_id = ''
+      # it 'カテゴリーが空では登録できないこと' do
+      #   @item.category_id = ''
+      #   @item.valid?
+      #   expect(@item.errors.full_messages).to include("Category is not a number")
+      # end
+
+      it 'カテゴリーが1では登録できないこと' do
+        @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Category is not included in the list')
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
       end
 
-      it '商品の状態が空では登録できないこと' do
-        @item.condition_id = ''
+      it '商品の状態が1では登録できないこと' do
+        @item.condition_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Condition is not included in the list')
+        expect(@item.errors.full_messages).to include("Condition must be other than 1")
       end
 
-      it '配送料の負担が空では登録できないこと' do
-        @item.delivery_fee_id = ''
+      it '配送料の負担が1では登録できないこと' do
+        @item.delivery_fee_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Delivery fee is not included in the list')
+        expect(@item.errors.full_messages).to include("Delivery fee must be other than 1")
       end
 
-      it '発送元の地域が空では登録できないこと' do
-        @item.area_id = ''
+      it '発送元の地域が1では登録できないこと' do
+        @item.area_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Area is not a number')
+        expect(@item.errors.full_messages).to include("Area must be other than 1")
       end
 
-      it '発送までの日数が空では登録できないこと' do
-        @item.delivery_time_id = ''
+      it '発送までの日数が1では登録できないこと' do
+        @item.delivery_time_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Delivery time is not included in the list')
+        expect(@item.errors.full_messages).to include("Delivery time must be other than 1")
       end
 
       it '販売価格が空だと登録できないこと' do
@@ -69,13 +75,13 @@ RSpec.describe Item, type: :model do
       end
 
       it '価格が¥300以下だと登録できないこと' do
-        @item.price = '299'
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not included in the list')
       end
 
       it '価格が¥10000000以上だと登録できないこと' do
-        @item.price = '10000000'
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not included in the list')
       end
@@ -84,6 +90,18 @@ RSpec.describe Item, type: :model do
         @item.price = 'あ'
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not a number')
+      end
+
+      it '販売価格は半角英語のみでは登録できない' do
+        @item.price = 'aaaaaa'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+
+      it '販売価格は半角英数混合では登録できない' do
+        @item.price = 'a1a1a1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
       end
     end
   end

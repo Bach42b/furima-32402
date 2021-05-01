@@ -3,6 +3,11 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one :buy
   has_one_attached :image
+  belongs_to_active_hash :category
+  belongs_to_active_hash :condition
+  belongs_to_active_hash :delivery_fee
+  belongs_to_active_hash :area
+  belongs_to_active_hash :delivery_time
 
   with_options presence: true do
     validates :price
@@ -11,15 +16,19 @@ class Item < ApplicationRecord
     validates :description
   end
 
-  validates :category_id,             inclusion: { in: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11] }
-  validates :condition_id,            inclusion: { in: [2, 3, 4, 5, 6, 7] }
-  validates :delivery_fee_id,         inclusion: { in: [2, 3] }
-  validates :area_id,                 numericality: { greater_than_or_equal_to: 2, less_than_or_equal_to: 48 }
-  validates :delivery_time_id,        inclusion: { in: [2, 3, 4] }
+  with_options  numericality: { other_than: 1 } do
+    validates :category_id
+    validates :condition_id
+    validates :delivery_fee_id
+    validates :area_id
+    validates :delivery_time_id
+  end
+
 
   validates :price, format: { with: /\A[0-9]+\z/ }
 
   validates :price, inclusion: { in: 300..9_999_999 }
 
   validates :price, numericality: true
+
 end
