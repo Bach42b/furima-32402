@@ -8,6 +8,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :delivery_fee
   belongs_to_active_hash :area
   belongs_to_active_hash :delivery_time
+  has_one    :purchase
 
   with_options presence: true do
     validates :price
