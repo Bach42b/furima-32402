@@ -6,14 +6,20 @@
     <h2 class="name">
       <%= "商品名" %>
     </h2>
+
+
+
     <div class="item-img-content">
-      <%= image_tag "item-sample.png" ,class:"item-box-img" %>
+      <%= image_tag @item.image, class: 'item-box-image' if @item.image.attached? %>
       <%# 商品が売れている場合は、sold outを表示しましょう %>
       <div class="sold-out">
         <span>Sold Out!!</span>
       </div>
       <%# //商品が売れている場合は、sold outを表示しましょう %>
     </div>
+
+
+
     <div class="item-price-box">
       <span class="item-price">
         ¥ 999,999,999
@@ -107,4 +113,4 @@
   <%# //詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
 </div>
 
-<%= render "shared/footer" %>
+<%= render "devise/shared/footer" %>
